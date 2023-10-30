@@ -9,7 +9,17 @@ const PORT = process.env.PORT ?? 1234
 
 app.disable('x-powered-by')
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: (origin, callback) => {
+    if (origin === 'https://client-api-dev-qjme.3.us-1.fl0.io/') {
+      return callback(null, true)
+    }
+
+    if (!origin) {
+      return callback(null, true)
+    }
+  }
+}))
 
 app.get('/users', (req, res) => {
   const { username } = req.query
