@@ -1,4 +1,4 @@
-GET http://localhost:1234/users/1
+GET http://localhost:1234/users/ed7758f1-8575-4873-bffd-42215ef6253e
 
 GET http://localhost:1234/users
 
@@ -8,5 +8,16 @@ POST  http://localhost:1234/users
 Content-Type: application/json
 
 {
-    
+    "username": "jo_chipy",
+    "name": "Jeronimo",
+    "lastName": "Chipy",
+    "email": "chipyjeronimo@gmail.com",
+    "country": "Argentina"
+}
+
+PATCH   http://localhost:1234/users/cde3-1049-4b87-8155-be2960cd350f
+Content-Type: application/json
+
+{
+    "username": "jerojerojerojero"
 }
