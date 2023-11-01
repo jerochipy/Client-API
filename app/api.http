@@ -4,11 +4,11 @@ GET http://localhost:1234/users
 
 GET http://localhost:1234/users?username=jero
 
-POST  http://localhost:1234/users
+POST  https://client-api-dev-qjme.3.us-1.fl0.io/users
 Content-Type: application/json
 
 {
-    "username": "jo_chipy",
+    "username": "juanjo_chipy",
     "name": "Jeronimo",
     "lastName": "Chipy",
     "email": "chipyjeronimo@gmail.com",
