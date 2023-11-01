@@ -5,6 +5,7 @@ export class UserController {
   static async getAll (req, res) {
     const { username } = req.params
     if (username) {
+      console.log('dsfsdfs')
       const user = await UserModel.getByUsername({ username })
       if (user) return res.json(user)
       res.status(404).json({ message: 'User not found' })

@@ -2,7 +2,8 @@ import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
   'http://localhost:1234',
-  'https://client-api-dev-qjme.3.us-1.fl0.io/'
+  'https://client-api-dev-qjme.3.us-1.fl0.io/',
+  'http://localhost:4200',
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
