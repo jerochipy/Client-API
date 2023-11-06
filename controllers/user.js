@@ -3,15 +3,9 @@ import { UserModel } from '../models/user.js'
 import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService } from "../services/users.js";
 
 export class UserController {
-  static async getAll (req, res) {
-    const { username } = req.params
-    if (username) {
-      console.log('dsfsdfs')
-      const user = await findAllUsers();
-      if (user) return res.json(user)
-      res.status(404).json({ message: 'User not found' })
-    }
-    res.json(await UserModel.getAll())
+  static async getAll (req,res) {
+    const data = await findAllUsers()
+    return res.status(200).createjson(data)
   }
 
   static async getById (req, res) {
@@ -34,7 +28,6 @@ export class UserController {
   static async update (req, res) {
     const { id } = req.params
     const result = validatePartialUser(req.body)
-
     if (result.error) {
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
@@ -43,5 +36,11 @@ export class UserController {
     if (updateUser === false) return res.status(404).json({ message: 'User not found' })
 
     res.status(201).json(updateUser)
+  }
+
+  static async delete (req,res) {
+    const { id } = req.params;
+    await deleteUserService(id);
+    res.status(200).send(" Ha sido Eliminado Correctamente");
   }
 }

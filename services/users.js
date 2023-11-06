@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient()
 
@@ -11,9 +12,8 @@ export const findAllUsers = async () => {
 }
 
 export const createUserService = async (body) => {  
-    body.role_Id = Number(body.role_Id) 
-    const password = body.password;
-    body.password = await bcrypt.hash(password, 8);
+    const password = body.Password;
+    body.Password = await bcrypt.hash(password, 8);
     const data = await prisma.user.create( {data: body });
     return data;
 }
@@ -21,18 +21,16 @@ export const createUserService = async (body) => {
 export const findUserServiceById = async (id) => {
     const data = await prisma.user.findUnique({
       where: {
-        id: Number(id),
+        Id: Number(id),
       },}
       );
     return data;
   }
   
   export const updateUserService = async (id,body) =>{
-    body.role_Id = Number(body.role_Id) 
-
     const data = await prisma.user.update({
       where: {
-        id: Number(id),
+        Id: Number(id),
       },
       data: body,
     })
@@ -40,10 +38,14 @@ export const findUserServiceById = async (id) => {
     return data;
   }
   
-  export const deleteUserService = async(id) =>{
-    const data = await prisma.user.delete({
-      where: { id: Number(id)}}
-    );
+  export const deleteUserService = async (id) => {
+    const data = await prisma.user.update({
+      where: { Id: Number(id) },
+      data: {
+        is_deleted: true
+      }
+    });
   
     return data;
   }
+  
