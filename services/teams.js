@@ -44,10 +44,10 @@ export const findTeamServiceById = async (id) => {
 }
 
 export const getTeamsApiService = async (id) => {
-    const url = env('API_URL') + `/teams?id=${id}`;
+    const url = process.env.API_URL + `/teams?id=${id}`;
     const headers = {
       'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-rapidapi-key': env('API_KEY_URL_HEADER'),
+      'x-rapidapi-key': process.env.API_KEY_URL_HEADER,
     };
   
     try {
