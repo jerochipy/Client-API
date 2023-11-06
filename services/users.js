@@ -5,7 +5,11 @@ const prisma = new PrismaClient()
 
 export const findAllUsers = async () => {
    
-    const data = await prisma.user.findMany();
+    const data = await prisma.user.findMany({
+      where: {
+        is_deleted: false,
+      },
+    });
  
     return data;
  

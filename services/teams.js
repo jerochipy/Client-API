@@ -4,7 +4,11 @@ import fetch from 'node-fetch';
 const prisma = new PrismaClient();
 
 export const findAllTeams = async () => {
-  const data = await prisma.team.findMany();
+  const data = await prisma.team.findMany({
+    where: {
+      is_deleted: false,
+    },
+  });
   return data;
 }
 
