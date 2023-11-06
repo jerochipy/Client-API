@@ -5,7 +5,7 @@ import { createUserService, findAllUsers, findUserServiceById, updateUserService
 export class UserController {
   static async getAll (req,res) {
     const data = await findAllUsers()
-    return res.status(200).createjson(data)
+    return res.status(200).json(data)
   }
 
   static async getById (req, res) {
