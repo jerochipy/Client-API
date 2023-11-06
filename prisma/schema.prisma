@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Venue {
+  id        Int     @id @default(autoincrement())
+}
+
+model User {
+  Id        Int     @id @default(autoincrement())
+  Email     String  @unique
+  Username  String
+  Password  String
+  FirstName String
+  LastName  String
+  Country   String
+  is_deleted Boolean @default(false)
+}
+
+model League {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  country   String
+  code      String
+  season    String
+  team      Int?
+  type      String
+  current   Boolean
+  search    String
+  last      Int?
+  is_deleted Boolean @default(false)
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  league    Int
+  season    String
+  country   String
+  code      String
+  venue     Int
+  search    String
+  is_deleted Boolean @default(false)
+  leagueId  Int
+  venueId   Int
+}
+
+model Player {
+  id        Int     @id @default(autoincrement())
+  team      Int
+  league    Int
+  season    String
+  search    String
+  page      Int   @default(1)
+  is_deleted Boolean @default(false)
+}
+
+model FollowLeague {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  LeagueId  Int
+  is_deleted Boolean @default(false)
+}
+
+model FollowTeam {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  TeamId    Int
+  is_deleted Boolean @default(false)
+}
+
+model FollowPlayer {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  PlayerId  Int
+  is_deleted Boolean @default(false)
+}
+
