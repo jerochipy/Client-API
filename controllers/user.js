@@ -43,4 +43,29 @@ export class UserController {
     await deleteUserService(id);
     res.status(200).send(" Ha sido Eliminado Correctamente");
   }
+
+  static async  login (req,res){
+    console.log(req.bod)
+
+    const body = matchedData(req);
+    try{ 
+
+        const data = await loginService(body)
+
+        if (!data){
+            res.send({res:"email o contraseña invalidos"})
+        }
+        else{
+            res.send({res:"logueado correctamente", token:data});
+        }
+     
+
+    }
+        catch(msg){
+        console.log(msg);
+        return res.status(400).send('Error');
+    }
+}
+
+
 }

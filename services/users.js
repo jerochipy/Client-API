@@ -53,3 +53,21 @@ export const findUserServiceById = async (id) => {
     return data;
   }
   
+
+  export const loginService = async (body) => {
+    const data = await prisma.user.findFirst({
+      where: {
+        email: body.email
+      }}
+      )
+   
+    const validPassword = await bcrypt.compare(body.password, data.password);
+    if (!validPassword) return false;
+
+    const token = jwt.sign(data, process.env.JWT_SECRET,{
+        expiresIn: process.env.JWT_EXPIRES
+    });
+
+ 
+      return token;
+  }
