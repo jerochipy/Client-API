@@ -1,6 +1,5 @@
 import { validateUser, validatePartialUser } from '../app/users.js'
-import { UserModel } from '../models/user.js'
-import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService } from "../services/users.js";
+import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService, loginService } from "../services/users.js";
 
 export class UserController {
   static async getAll (req,res) {
@@ -45,12 +44,10 @@ export class UserController {
   }
 
   static async  login (req,res){
-    console.log(req.bod)
-
-    const body = matchedData(req);
+    console.log(req.body)
     try{ 
 
-        const data = await loginService(body)
+        const data = await loginService(req.body)
 
         if (!data){
             res.send({res:"email o contraseña invalidos"})
