@@ -1,17 +1,10 @@
 import { validateUser, validatePartialUser } from '../app/users.js'
-import { createUserService, findUserServiceById, updateUserService, deleteUserService, loginService } from '../services/users.js'
-import { UserModel } from '../models/user.js'
+import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService, loginService } from '../services/users.js'
+
 export class UserController {
   static async getAll (req, res) {
-    const { username } = req.query
-
-    if (username) {
-      const user = await UserModel.getByUsername({ username })
-      if (user) return res.json(user)
-      console.log(username)
-      return res.status(404).json({ message: 'User not found' })
-    }
-    res.json(await UserModel.getAll())
+    const data = await findAllUsers()
+    return res.status(200).json(data)
   }
 
   static async getById (req, res) {
