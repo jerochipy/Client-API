@@ -9,14 +9,17 @@ const userShema = z.object({
   name: z.string({
     required_error: 'Name is required'
   }),
-  lastName: z.string({
-    required_error: 'Last name is required.'
+  lastname: z.string({
+    required_error: 'Last name is required'
   }),
   email: z.string({
     required_error: 'Email is required'
   }).email(),
   country: z.string({
     required_error: 'Country is required'
+  }),
+  password: z.string({
+    required_error: 'Password is required'
   })
 })
 

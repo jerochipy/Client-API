@@ -3,12 +3,13 @@ import { UserModel } from '../models/user.js'
 
 export class UserController {
   static async getAll (req, res) {
-    const { username } = req.params
+    const { username } = req.query
+
     if (username) {
-      console.log('dsfsdfs')
       const user = await UserModel.getByUsername({ username })
       if (user) return res.json(user)
-      res.status(404).json({ message: 'User not found' })
+      console.log(username)
+      return res.status(404).json({ message: 'User not found' })
     }
     res.json(await UserModel.getAll())
   }
@@ -22,7 +23,7 @@ export class UserController {
 
   static async create (req, res) {
     const result = validateUser(req.body)
-
+    console.log(req.body)
     if (result.error) {
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
