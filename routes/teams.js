@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import { TeamController } from '../controllers/team.js'
+import { verifyToken } from "../validators/authJwt.js";
 
 export const teamsRouter = Router()
 
-teamsRouter.get('/', TeamController.getAll)
+teamsRouter.get('/', verifyToken, TeamController.getAll)
 
-teamsRouter.get('/:id', TeamController.getById)
+teamsRouter.get('/:id', verifyToken,  TeamController.getById)
 
-teamsRouter.post('/', TeamController.create)
+teamsRouter.post('/', verifyToken, TeamController.create)
 

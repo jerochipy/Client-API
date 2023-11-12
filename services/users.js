@@ -1,5 +1,8 @@
-import { PrismaClient } from '@prisma/client'
+import pkg from '@prisma/client';
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient()
 
@@ -53,3 +56,24 @@ export const findUserServiceById = async (id) => {
     return data;
   }
   
+
+  export const loginService = async (body) => {
+    const { email, password } = body;
+    console.log(body);
+    // Buscar el usuario por su correo electrónico
+    const user = await prisma.user.findUnique({
+      where: {
+        Email: body.Email,
+      },
+    });
+  
+    // Verificar si el usuario existe y si la contraseña es correcta
+    if (!user || !bcrypt.compareSync(body.Password, user.Password)) {
+      return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+  
+    // Generar un token JWT
+    const token = jwt.sign({ userId: user.Id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES });
+  
+    return token;
+  }

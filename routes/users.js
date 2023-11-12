@@ -1,14 +1,18 @@
 import { Router } from 'express'
 import { UserController } from '../controllers/user.js'
+import { verifyToken } from "../validators/authJwt.js";
+
 
 export const usersRouter = Router()
 
-usersRouter.get('/', UserController.getAll)
+usersRouter.get('/', verifyToken, UserController.getAll)
 
-usersRouter.get('/:id', UserController.getById)
+usersRouter.get('/:id', verifyToken, UserController.getById)
 
 usersRouter.post('/', UserController.create)
 
-usersRouter.patch('/:id', UserController.update)
+usersRouter.post('/login', UserController.login)
 
-usersRouter.delete('/:id', UserController.delete)
+usersRouter.patch('/:id', verifyToken, UserController.update)
+
+usersRouter.delete('/:id', verifyToken, UserController.delete)

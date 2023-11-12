@@ -1,6 +1,5 @@
 import { validateUser, validatePartialUser } from '../app/users.js'
-import { UserModel } from '../models/user.js'
-import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService } from "../services/users.js";
+import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService, loginService } from "../services/users.js";
 
 export class UserController {
   static async getAll (req,res) {
@@ -43,4 +42,27 @@ export class UserController {
     await deleteUserService(id);
     res.status(200).send(" Ha sido Eliminado Correctamente");
   }
+
+  static async  login (req,res){
+    console.log(req.body)
+    try{ 
+
+        const data = await loginService(req.body)
+
+        if (!data){
+            res.send({res:"email o contraseña invalidos"})
+        }
+        else{
+            res.send({res:"logueado correctamente", token:data});
+        }
+     
+
+    }
+        catch(msg){
+        console.log(msg);
+        return res.status(400).send('Error');
+    }
+}
+
+
 }
