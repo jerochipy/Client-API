@@ -58,8 +58,6 @@ export const findUserServiceById = async (id) => {
   
 
   export const loginService = async (body) => {
-    const { email, password } = body;
-    console.log(body);
     // Buscar el usuario por su correo electrónico
     const user = await prisma.user.findUnique({
       where: {
