@@ -21,7 +21,7 @@ const userShema = z.object({
   }),
   Password: z.string({
     required_error: 'Password is required'
-    })
+  })
 })
 
 export function validateUser (user) {

@@ -22,36 +22,25 @@ export const createUserService = async (body) => {
 }
 
 export const findUserServiceById = async (id) => {
-    const data = await prisma.user.findUnique({
-      where: {
-        Id: Number(id),
-      },}
-      );
-    return data;
+  const data = await prisma.user.findUnique({
+    where: {
+      Id: Number(id)
+    }
   }
-  
-  export const updateUserService = async (id,body) =>{
-    const data = await prisma.user.update({
-      where: {
-        Id: Number(id),
-      },
-      data: body,
-    })
-  
-    return data;
-  }
-  
-  export const deleteUserService = async (id) => {
-    const data = await prisma.user.update({
-      where: { Id: Number(id) },
-      data: {
-        is_deleted: true
-      }
-    });
-  
-    return data;
-  }
-  
+  )
+  return data
+}
+
+export const updateUserService = async (id, body) => {
+  const data = await prisma.user.update({
+    where: {
+      Id: Number(id)
+    },
+    data: body
+  })
+
+  return data
+}
 
   export const loginService = async (body) => {
     // Buscar el usuario por su correo electrónico
@@ -86,3 +75,14 @@ export const findUserServiceById = async (id) => {
         country: user.Country
     };
 };
+
+export const deleteUserService = async (id) => {
+  const data = await prisma.user.update({
+    where: { Id: Number(id) },
+    data: {
+      is_deleted: true
+    }
+  })
+
+  return data
+}
