@@ -1,28 +1,24 @@
-import pkg from '@prisma/client';
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import pkg from '@prisma/client'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
-const { PrismaClient } = pkg;
+const { PrismaClient } = pkg
 
 const prisma = new PrismaClient()
 
 export const findAllUsers = async () => {
-   
-    const data = await prisma.user.findMany({
-      where: {
-        is_deleted: false,
-      },
-    });
- 
-    return data;
- 
+  const data = await prisma.user.findMany({
+    where: {
+      is_deleted: false
+    }
+  })
+  return data
 }
-
-export const createUserService = async (body) => {  
-    const password = body.Password;
-    body.Password = await bcrypt.hash(password, 8);
-    const data = await prisma.user.create( {data: body });
-    return data;
+export const createUserService = async (body) => {
+  const password = body.Password
+  body.Password = await bcrypt.hash(password, 8)
+  const data = await prisma.user.create({ data: body })
+  return data
 }
 
 export const findUserServiceById = async (id) => {

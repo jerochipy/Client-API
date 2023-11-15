@@ -1,15 +1,15 @@
 import { validateUser, validatePartialUser } from '../app/users.js'
-import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService, loginService } from "../services/users.js";
+import { createUserService, findAllUsers, findUserServiceById, updateUserService, deleteUserService, loginService } from '../services/users.js'
 
 export class UserController {
-  static async getAll (req,res) {
+  static async getAll (req, res) {
     const data = await findAllUsers()
     return res.status(200).json(data)
   }
 
   static async getById (req, res) {
     const { id } = req.params
-    const user = await findUserServiceById(id);
+    const user = await findUserServiceById(id)
     if (user) return res.json(user)
     res.status(404).json({ message: 'User not found' })
   }
@@ -20,7 +20,7 @@ export class UserController {
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
 
-    const newUser = await createUserService(result.data);
+    const newUser = await createUserService(result.data)
     res.status(201).json(newUser)
   }
 
@@ -31,16 +31,16 @@ export class UserController {
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
 
-    const updateUser = await updateUserService(id,result.data);
+    const updateUser = await updateUserService(id, result.data)
     if (updateUser === false) return res.status(404).json({ message: 'User not found' })
 
     res.status(201).json(updateUser)
   }
 
-  static async delete (req,res) {
-    const { id } = req.params;
-    await deleteUserService(id);
-    res.status(200).send(" Ha sido Eliminado Correctamente");
+  static async delete (req, res) {
+    const { id } = req.params
+    await deleteUserService(id)
+    res.status(200).send('Ha sido Eliminado Correctamente')
   }
 
   static async login(req, res) {

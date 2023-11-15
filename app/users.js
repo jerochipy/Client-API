@@ -9,6 +9,7 @@ const userShema = z.object({
   FirstName: z.string({
     required_error: 'Name is required'
   }),
+
   LastName: z.string({
     required_error: 'Last name is required.'
   }),
