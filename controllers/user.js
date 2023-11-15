@@ -43,26 +43,31 @@ export class UserController {
     res.status(200).send(" Ha sido Eliminado Correctamente");
   }
 
-  static async  login (req,res){
-    console.log(req.body)
-    try{ 
+  static async login(req, res) {
+    try {
+      const data = await loginService(req.body);
 
-        const data = await loginService(req.body)
-
-        if (!data){
-            res.send({res:"email o contraseña invalidos"})
-        }
-        else{
-            res.send({res:"logueado correctamente", token:data});
-        }
-     
-
+      if (!data) {
+        res.status(401).json({ error: "Email o contraseña inválidos" });
+      } else {
+        res.status(200).json({
+          message: "Logueado correctamente",
+          token: data.token,
+          user: {
+            email: data.email,
+            username: data.username,
+            userId: data.userId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            country: data.country
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
     }
-        catch(msg){
-        console.log(msg);
-        return res.status(400).send('Error');
-    }
-}
+  }
 
 
 }

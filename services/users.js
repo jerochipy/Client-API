@@ -60,18 +60,33 @@ export const findUserServiceById = async (id) => {
   export const loginService = async (body) => {
     // Buscar el usuario por su correo electrónico
     const user = await prisma.user.findUnique({
-      where: {
-        Email: body.Email,
-      },
+        where: {
+            Email: body.Email,
+        },
     });
-  
+
     // Verificar si el usuario existe y si la contraseña es correcta
     if (!user || !bcrypt.compareSync(body.Password, user.Password)) {
-      return res.status(401).json({ error: 'Credenciales inválidas' });
+        return null;
     }
-  
-    // Generar un token JWT
-    const token = jwt.sign({ userId: user.Id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES });
-  
-    return token;
-  }
+
+    const token = jwt.sign(
+        {
+            userId: user.Id,
+            email: user.Email,
+            username: user.Username,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES }
+    );
+
+    return {
+        token,
+        email: user.Email,
+        username: user.Username,
+        userId: user.Id,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        country: user.Country
+    };
+};

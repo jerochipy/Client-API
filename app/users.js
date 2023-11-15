@@ -19,7 +19,7 @@ const userShema = z.object({
     required_error: 'Country is required'
   }),
   Password: z.string({
-    required_error: 'Country is required'
+    required_error: 'Password is required'
     })
 })
 
