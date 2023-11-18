@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { UserController } from '../controllers/user.js'
-import { verifyToken } from "../validators/authJwt.js";
-
+import { verifyToken } from '../validators/authJwt.js'
 
 export const usersRouter = Router()
 

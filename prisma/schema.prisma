@@ -82,4 +82,3 @@ model FollowPlayer {
   PlayerId  Int
   is_deleted Boolean @default(false)
 }
-
