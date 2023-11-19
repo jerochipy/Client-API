@@ -1,18 +1,16 @@
-import { createPredictionService, getPredictionsByMatchId } from "../services/predictions.js";
+import { createPredictionService, getPredictionsByMatchId, getTopPredictionsByMatchId } from "../services/predictions.js";
 
 export class PredictionController {
 
   static async createPrediction (req, res) {
     const { matchId, homeScore, awayScore } = req.body;
-    const userId = req.user.id; // Supongo que guardas la información del usuario en req.user
-
+    const userId = req.user.userId;
     const predictionData = {
       matchId: matchId,
       userId: userId,
       homeScore: homeScore,
       awayScore: awayScore,
     };
-
     const newPrediction = await createPredictionService(predictionData);
     res.status(201).json(newPrediction);
   }
@@ -23,5 +21,10 @@ export class PredictionController {
     res.status(200).json(predictions);
   }
 
-  // Otras funciones del controlador si es necesario
+  static async getTopPredictionsByMatch (req, res) {
+    const { matchId } = req.params;
+    const topPredictions = await getTopPredictionsByMatchId(matchId);
+    res.status(200).json(topPredictions);
+  }
+  
 }

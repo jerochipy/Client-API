@@ -4,6 +4,8 @@ import { verifyToken } from "../validators/authJwt.js";
 
 export const predictionRouter = Router()
 
-predictionRouter.post('/predictions', verifyToken, PredictionController.createPrediction);
+predictionRouter.post('/', verifyToken, PredictionController.createPrediction);
 
-predictionRouter.get('/predictions/:matchId', verifyToken, PredictionController.getPredictionsByMatch);
+predictionRouter.get('/:matchId', verifyToken, PredictionController.getPredictionsByMatch);
+
+predictionRouter.get('/top/:matchId', verifyToken, PredictionController.getTopPredictionsByMatch);

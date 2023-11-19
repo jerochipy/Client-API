@@ -111,23 +111,27 @@ export const followTeam = async (id, TeamId) => {
     }
   };
   
-  export const unFollowTeam = async (id) => {
-    const data = await prisma.followTeam.update({
-      where: { 
-        Id: Number(id)
+  export const unFollowTeam = async (id, TeamId) => {
+    const data = await prisma.followTeam.updateMany({
+      where: {
+        UserId: Number(id),
+        TeamId: Number(TeamId),
       },
       data: {
-        is_deleted: true
-      }
+        is_deleted: true,
+      },
     });
     return data;
   };
   
+  
+  
 
-export const unFollowPlayer = async (id) => {
-  const data = await prisma.followPlayer.update({
+export const unFollowPlayer = async (id, PlayerId) => {
+  const data = await prisma.followPlayer.updateMany({
     where: { 
-        Id: Number(id)
+        UserId: Number(id),
+        PlayerId: Number(PlayerId),
      },
     data: {
       is_deleted: true
@@ -136,10 +140,11 @@ export const unFollowPlayer = async (id) => {
   return data;
 }
 
-export const unFollowLeague = async (id) => {
-  const data = await prisma.followLeague.update({
+export const unFollowLeague = async (id, LeagueId) => {
+  const data = await prisma.followLeague.updateMany({
     where: {         
-        Id: Number(id)
+      UserId: Number(id),
+      LeagueId: Number(LeagueId),
     },
     data: {
       is_deleted: true
