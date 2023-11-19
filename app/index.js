@@ -3,7 +3,9 @@ import { usersRouter } from '../routes/users.js'
 import { corsMiddleware } from '../middlewares/cors.js'
 import { teamsRouter } from '../routes/teams.js'
 import { followRouter } from '../routes/follows.js'
+import { predictionRouter } from '../routes/predictions.js'
 import { fixtureRoutes } from '../routes/fixtures.js'
+
 const app = express()
 
 const PORT = process.env.PORT ?? 1234
@@ -16,6 +18,7 @@ app.use(corsMiddleware())
 app.use('/users', usersRouter)
 app.use('/teams', teamsRouter)
 app.use('/follows', followRouter)
+app.use('/predictions', predictionRouter)
 app.use('/fixtures', fixtureRoutes)
 
 app.use((req, res) => {

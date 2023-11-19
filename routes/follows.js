@@ -16,8 +16,8 @@ followRouter.post('/players/:PlayerId', verifyToken, FollowController.followPlay
 
 followRouter.post('/leagues/:LeagueId', verifyToken, FollowController.followLeague)
 
-followRouter.delete('/teams/:id', verifyToken, FollowController.unFollowTeam);
+followRouter.delete('/teams/:TeamId', verifyToken, FollowController.unFollowTeam);
 
-followRouter.delete('/players/:id', verifyToken, FollowController.unFollowPlayer);
+followRouter.delete('/players/:PlayerId', verifyToken, FollowController.unFollowPlayer);
 
-followRouter.delete('/leagues/:id', verifyToken, FollowController.unFollowLeague);
+followRouter.delete('/leagues/:LeagueId', verifyToken, FollowController.unFollowLeague);
