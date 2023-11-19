@@ -45,15 +45,15 @@ export class UserController {
     res.status(200).send('Ha sido Eliminado Correctamente')
   }
 
-  static async login(req, res) {
+  static async login (req, res) {
     try {
-      const data = await loginService(req.body);
+      const data = await loginService(req.body)
 
       if (!data) {
-        res.status(401).json({ error: "Email o contraseña inválidos" });
+        res.status(401).json({ error: 'Email o contraseña inválidos' })
       } else {
         res.status(200).json({
-          message: "Logueado correctamente",
+          message: 'Logueado correctamente',
           token: data.token,
           user: {
             email: data.email,
@@ -62,12 +62,12 @@ export class UserController {
             firstName: data.firstName,
             lastName: data.lastName,
             country: data.country
-          },
-        });
+          }
+        })
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Error interno del servidor" });
+      console.log(error)
+      res.status(500).json({ error: 'Error interno del servidor' })
     }
   }
 }
