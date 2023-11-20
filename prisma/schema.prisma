@@ -82,3 +82,12 @@ model FollowPlayer {
   PlayerId  Int
   is_deleted Boolean @default(false)
 }
+
+model Prediction {
+  id         Int      @id @default(autoincrement())
+  matchId    Int
+  userId     Int
+  homeScore  Int
+  awayScore  Int
+  createdAt  DateTime @default(now())
+}

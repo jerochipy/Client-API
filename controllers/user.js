@@ -15,8 +15,10 @@ export class UserController {
   }
 
   static async create (req, res) {
+    console.log(req.body);
     const result = validateUser(req.body)
     if (result.error) {
+      console.log(result.error);
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
 
