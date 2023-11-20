@@ -14,26 +14,26 @@ import {
   export class FollowController {
   
     static async getAllFollowTeams(req, res) {
-      const id = req.user.Id;
+      const id = req.user.userId;
       const data = await findAllFollowTeams(id);
       return res.status(200).json(data);
     }
   
     static async getAllFollowPlayers(req, res) {
-      const id = req.user.Id;
+      const id = req.user.userId;
       const data = await findAllFollowPlayers(id);
       return res.status(200).json(data);
     }
   
     static async getAllFollowLeagues(req, res) {
-      const id = req.user.Id;
+      const id = req.user.userId;
       const data = await findAllFollowLeagues(id);
       return res.status(200).json(data);
     }
   
     static async followTeam(req, res) {
         const id = req.user.userId;
-        const { TeamId } = req.params; // Cambiado para obtener el TeamId desde el cuerpo de la solicitud
+        const { TeamId } = req.params;
 
         try {
           const newFollow = await followTeam(id, TeamId);
@@ -44,7 +44,7 @@ import {
     }
 
     static async followPlayer(req, res) {
-      const id = req.user.Id;
+      const id = req.user.userId;
       const { PlayerId } = req.params;
       try {
         const newFollow = await followPlayer(id, PlayerId);
@@ -55,7 +55,7 @@ import {
     }
   
     static async followLeague(req, res) {
-      const id = req.user.Id;
+      const id = req.user.userId;
       const { LeagueId } = req.params;
       try {
         const newFollow = await followLeague(id, LeagueId);
@@ -66,9 +66,10 @@ import {
     }
   
     static async unFollowTeam(req, res) {
-      const { id } = req.params;
+      const id = req.user.userId;
+      const { TeamId } = req.params;
       try {
-        await unFollowTeam(id);
+        await unFollowTeam(id, TeamId);
         res.status(200).send("Eliminado correctamente");
       } catch (error) {
         res.status(400).json({ error: error.message });
@@ -76,9 +77,10 @@ import {
     }
   
     static async unFollowPlayer(req, res) {
-      const { id } = req.params;
+      const id = req.user.userId;
+      const { PlayerId } = req.params;   
       try {
-        await unFollowPlayer(id);
+        await unFollowPlayer(id, PlayerId);
         res.status(200).send("Eliminado correctamente");
       } catch (error) {
         res.status(400).json({ error: error.message });
@@ -86,9 +88,10 @@ import {
     }
   
     static async unFollowLeague(req, res) {
-      const { id } = req.params;
+      const id = req.user.userId;
+      const { LeagueId } = req.params;
       try {
-        await unFollowLeague(id);
+        await unFollowLeague(id, LeagueId);
         res.status(200).send("Eliminado correctamente");
       } catch (error) {
         res.status(400).json({ error: error.message });
