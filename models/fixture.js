@@ -1,5 +1,5 @@
-import { number } from 'zod'
 import { readJSON } from '../app/utils.js'
+import { DataApi } from './dataApi.js'
 const fixtures = readJSON('../app/fixtures.json')
 
 export class FixtureModel {
@@ -56,7 +56,7 @@ export class FixtureModel {
     let res = this.fixture.filter(item => item.league.id == league && item.league.season == season)
     if (res.length === 0) {
       console.log('pide a la api')
-      res = await this.getWithApi({ params: `leage=${league}&season${season}` })
+      res = await DataApi.getData({ params: `leage=${league}&season${season}` })
       if (res) {
         this.fixture = this.fixture.concat(res)
       }
@@ -67,8 +67,8 @@ export class FixtureModel {
   static async getByMatchId ({ id }) {
     let res = this.fixture.filter(item => item.fixture.id == id)
     if (res.length === 0) {
-      console.log('pide a la api')
-      res = await this.getWithApi({ params: `id=${id}` })
+      res = await DataApi.getData({endpoint: 'fixtures', params: `id=${id}` })
+      console.log(res)
       if (res) {
         this.fixture = this.fixture.concat(res)
       }
