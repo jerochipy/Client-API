@@ -53,7 +53,7 @@ export const getTeamsApiService = async (id) => {
     const url = process.env.API_URL + `/teams?id=${id}`;
     const headers = {
       'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-rapidapi-key': process.env.API_KEY_URL_HEADER,
+      'x-rapidapi-key': '71e9962cf38604017c974f8be33f449b',
     };
   
     try {
