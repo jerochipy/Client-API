@@ -35,7 +35,6 @@ export class LeaguesModel {
         this.leagues = this.leagues.concat(res)
       }
     }
-    console.log(startIndex, endIndex)
     //return res
     return startIndex === undefined || endIndex === undefined ? res : res.slice(startIndex, endIndex)
   }

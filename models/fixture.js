@@ -68,7 +68,6 @@ export class FixtureModel {
     let res = this.fixture.filter(item => item.fixture.id == id)
     if (res.length === 0) {
       res = await DataApi.getData({endpoint: 'fixtures', params: `id=${id}` })
-      console.log(res)
       if (res) {
         this.fixture = this.fixture.concat(res)
       }
