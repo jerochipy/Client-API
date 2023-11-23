@@ -1,28 +1,33 @@
-// import { createTeamService, findAllTeams, findTeamServiceById } from '../services/teams.js' con prisma
-// export class TeamController {
-//   static async getAll (req, res) {
-//     const data = await findAllTeams()
-//     return res.status(200).json(data)
-//   }
+import { createTeamService, findAllTeams, findTeamServiceById } from "../services/teams.js";
 
-//   static async create (req, res) {
-//     if (result.error) {
-//       return res.status(400).json({ error: JSON.parse(result.error.message) })
-//     }
-//     const newTeam = await createTeamService(result.data)
-//     res.status(201).json(newTeam)
-//   }
+export class TeamController {
 
-//   static async getById (req, res) {
-//     const { id } = req.params
-//     const team = await findTeamServiceById(id)
-//     if (team) return res.json(team)
-//     res.status(404).json({ message: 'Team not found' })
-//   }
-// }
+  static async getAll (req,res) {
+    const data = await findAllTeams()
+    return res.status(200).json(data)
+  }
+
+  static async create (req, res) {
+    console.log("entre");
+    console.log(req.body)
+    const newTeam = await createTeamService(req.body);
+    
+    res.status(201).json(newTeam)
+    
+  }
+
+  static async getById (req, res) {
+    const { id } = req.params
+    const team = await findTeamServiceById(id);
+    if (team) return res.json(team)
+    res.status(404).json({ message: 'Team not found' })
+  }
+
+
+}
 
 // con local
-import { TeamsModel } from '../models/teams.js'
+/*import { TeamsModel } from '../models/teams.js'
 
 export class TeamController {
   static async getAll (req, res) {
@@ -44,4 +49,4 @@ export class TeamController {
       return res.json(await TeamsModel.getById({ id }))
     }
   }
-}
+}*/

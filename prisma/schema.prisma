@@ -48,7 +48,7 @@ model Team {
   founded Int
   logo String
   is_deleted Boolean @default(false)
-  venueId   Int
+  venueid   Int?
 }
 
 

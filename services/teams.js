@@ -15,6 +15,7 @@ export const findAllTeams = async () => {
 }
 
 export const createTeamService = async (body) => {
+  console.log(body);
   const existingTeam = await prisma.team.findUnique({
     where: {
       id: body.id
@@ -69,7 +70,7 @@ export const getTeamsApiService = async (id) => {
         founded: teamData.founded,
         national: teamData.national,
         logo: teamData.logo,
-        venueId: apiData.venue.id
+        venueid: apiData.venue.id
       }
     } else {
       console.error(`Error en la respuesta de la API: ${response.statusText}`)
