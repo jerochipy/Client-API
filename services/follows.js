@@ -11,7 +11,18 @@ export const findAllFollowTeams = async (id) => {
       UserId: id
     },
   });
-  return data;
+
+  const teamInfoArray = await Promise.all(data.map(async (followedTeam) => {
+    const teamId = followedTeam.TeamId;
+    const teamInfo = await prisma.team.findUnique({
+      where: {
+        id: teamId,
+      },
+    });
+    return teamInfo;
+  }));
+
+  return teamInfoArray;
 }
 
 export const findAllFollowPlayers = async (id) => {
@@ -21,7 +32,18 @@ export const findAllFollowPlayers = async (id) => {
       UserId: id
     },
   });
-  return data;
+
+  const playerInfoArray = await Promise.all(data.map(async (followedPlayer) => {
+    const playerId = followedPlayer.PlayerId;
+    const playerInfo = await prisma.player.findUnique({
+      where: {
+        id: playerId,
+      },
+    });
+    return playerInfo;
+  }));
+
+  return playerInfoArray;
 }
 
 export const findAllFollowLeagues = async (id) => {
@@ -31,7 +53,21 @@ export const findAllFollowLeagues = async (id) => {
       UserId: id
     },
   });
-  return data;
+
+  console.log(data);
+  const leagueInfoArray = await Promise.all(data.map(async (followedLeague) => {
+    const leagueId = followedLeague.LeagueId;
+    console.log(leagueId);
+
+    const leagueInfo = await prisma.league.findUnique({
+      where: {
+        id: leagueId,
+      },
+    });
+    return leagueInfo;
+  }));
+
+  return leagueInfoArray;
 }
 
 export const followTeam = async (id, TeamId) => {

@@ -43,7 +43,7 @@ export class FollowController {
   }
 
   static async followPlayer (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const { PlayerId } = req.params
     try {
       const newFollow = await followPlayer(id, PlayerId)
@@ -54,7 +54,7 @@ export class FollowController {
   }
 
   static async followLeague (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const { LeagueId } = req.params
     try {
       const newFollow = await followLeague(id, LeagueId)
