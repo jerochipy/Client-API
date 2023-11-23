@@ -13,19 +13,19 @@ import {
 
 export class FollowController {
   static async getAllFollowTeams (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const data = await findAllFollowTeams(id)
     return res.status(200).json(data)
   }
 
   static async getAllFollowPlayers (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const data = await findAllFollowPlayers(id)
     return res.status(200).json(data)
   }
 
   static async getAllFollowLeagues (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const data = await findAllFollowLeagues(id)
     return res.status(200).json(data)
   }
