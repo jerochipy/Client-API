@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:@localhost:3306/futbol_mas?schema=public"
 }
 
 model Venue {
@@ -28,14 +28,8 @@ model User {
 model League {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  country   String
-  code      String
-  season    String
-  team      Int?
   type      String
-  current   Boolean
-  search    String
-  last      Int?
+  logo      String
   is_deleted Boolean @default(false)
 }
 
@@ -48,17 +42,16 @@ model Team {
   founded Int
   logo String
   is_deleted Boolean @default(false)
-  venueId   Int
 }
 
 
 model Player {
   id        Int     @id @default(autoincrement())
-  team      Int
-  league    Int
-  season    String
-  search    String
-  page      Int   @default(1)
+  name    String
+  age       Int
+  number    Int
+  position  String
+  photo     String
   is_deleted Boolean @default(false)
 }
 

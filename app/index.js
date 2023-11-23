@@ -5,7 +5,9 @@ import { teamsRouter } from '../routes/teams.js'
 import { followRouter } from '../routes/follows.js'
 import { predictionRouter } from '../routes/predictions.js'
 import { fixtureRoutes } from '../routes/fixtures.js'
-import { leaguesRoutes } from '../routes/leagues.js'
+import { leagueRoutes } from '../routes/leagues.js'
+import { playerRoutes } from '../routes/players.js'
+
 import cors from 'cors'
 const app = express()
 
@@ -20,7 +22,8 @@ app.use('/teams', teamsRouter)
 app.use('/follows', followRouter)
 app.use('/predictions', predictionRouter)
 app.use('/fixtures', fixtureRoutes)
-app.use('/leagues', leaguesRoutes)
+app.use('/leagues', leagueRoutes)
+app.use('/players', playerRoutes)
 
 app.use((req, res) => {
   res.status(404).send('<h1>404 Page not found!</h1>')

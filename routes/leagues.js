@@ -1,7 +1,12 @@
 import { Router } from 'express'
-import { LeaguesController } from '../controllers/leagues.js'
+import { LeagueController } from '../controllers/league.js'
 import { corsMiddleware } from '../middlewares/cors.js'
+import { verifyToken } from '../validators/authJwt.js'
 
-export const leaguesRoutes = Router()
+export const leagueRoutes = Router()
 
-leaguesRoutes.get('/', LeaguesController.getLeagues)
+leagueRoutes.get('/', LeagueController.getAll)
+
+leagueRoutes.get('/:id', verifyToken, LeagueController.getById)
+
+leagueRoutes.post('/', verifyToken, LeagueController.create)

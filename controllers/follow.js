@@ -43,7 +43,7 @@ export class FollowController {
   }
 
   static async followPlayer (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const { PlayerId } = req.params
     try {
       const newFollow = await followPlayer(id, PlayerId)
@@ -54,7 +54,7 @@ export class FollowController {
   }
 
   static async followLeague (req, res) {
-    const id = req.user.Id
+    const id = req.user.userId
     const { LeagueId } = req.params
     try {
       const newFollow = await followLeague(id, LeagueId)
@@ -65,9 +65,10 @@ export class FollowController {
   }
 
   static async unFollowTeam (req, res) {
-    const { id } = req.params
+    const id = req.user.userId
+    const { TeamId } = req.params
     try {
-      await unFollowTeam(id)
+      await unFollowTeam(id, TeamId)
       res.status(200).send('Eliminado correctamente')
     } catch (error) {
       res.status(400).json({ error: error.message })
@@ -75,9 +76,10 @@ export class FollowController {
   }
 
   static async unFollowPlayer (req, res) {
-    const { id } = req.params
+    const id = req.user.userId
+    const { PlayerId } = req.params
     try {
-      await unFollowPlayer(id)
+      await unFollowPlayer(id, PlayerId)
       res.status(200).send('Eliminado correctamente')
     } catch (error) {
       res.status(400).json({ error: error.message })
@@ -85,9 +87,10 @@ export class FollowController {
   }
 
   static async unFollowLeague (req, res) {
-    const { id } = req.params
+    const id = req.user.userId
+    const { LeagueId } = req.params
     try {
-      await unFollowLeague(id)
+      await unFollowLeague(id, LeagueId)
       res.status(200).send('Eliminado correctamente')
     } catch (error) {
       res.status(400).json({ error: error.message })
