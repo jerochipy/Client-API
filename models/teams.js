@@ -4,12 +4,12 @@ export class TeamsModel {
   static teams = []
 
   static async getAll ({ league, season }) {
-    let res = this.teams
+    let res = this.teams.filter(item=> item.team.league == league)
     if (res.length === 0) {
       console.log('pide a la api')
       res = await DataApi.getData({ endpoint: 'teams', params: `league=${league}&season=${season}` })
       if (res) {
-        this.leagues = this.teams.concat(res)
+        this.teams = this.teams.concat(res)
       }
     }
     console.log(res[0])

@@ -4,7 +4,7 @@ export class DataApi {
     const url = this.baseUrl + endpoint
     const headers = {
       // 'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-apisports-key': '5df9f31d6796c6fec507a3d72502182a'
+      'x-apisports-key': '06ae59572ac9e4c1659ee7af8a9247c8'
     }
 
     try {
@@ -12,6 +12,7 @@ export class DataApi {
       if (response.ok) {
         const data = await response.json()
         const apiData = data.response
+        console.log(data)
         return apiData
       } else {
         console.error(`Error en la respuesta de la API: ${response.statusText}`)
