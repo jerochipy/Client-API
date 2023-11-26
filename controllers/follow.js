@@ -31,13 +31,21 @@ export class FollowController {
   }
 
   static async followTeam (req, res) {
+    console.log("entre22");
+
     const id = req.user.userId
     const { TeamId } = req.params // Cambiado para obtener el TeamId desde el cuerpo de la solicitud
+    console.log(TeamId);
+    console.log(id);
 
     try {
       const newFollow = await followTeam(id, TeamId)
       res.status(201).json(newFollow)
+      console.log("entre22333");
+
     } catch (error) {
+      console.log("entre2444");
+
       res.status(400).json({ error: error.message })
     }
   }
@@ -55,6 +63,7 @@ export class FollowController {
 
   static async followLeague (req, res) {
     const id = req.user.userId
+    console.log(req.user)
     const { LeagueId } = req.params
     try {
       const newFollow = await followLeague(id, LeagueId)

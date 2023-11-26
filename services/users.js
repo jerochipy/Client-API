@@ -55,7 +55,7 @@ export const updateUserService = async (id, body) => {
         return null;
     }
 
-  const token = jwt.sign({ userId: user.Id }, 'jero', { expiresIn: '4h' })
+  const token = jwt.sign({ userId: user.Id }, 'jero', { expiresIn: '1h' })
 
 
     return {

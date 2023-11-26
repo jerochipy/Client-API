@@ -3,8 +3,12 @@ import { DataApi } from './dataApi.js'
 export class TeamsModel {
   static teams = []
 
+  static updateTeams () {
+    this.teams = DataApi.updatesApi({ timePattern: '46 2 * * *', endpoint: 'teams' })
+  }
+
   static async getAll ({ league, season }) {
-    let res = this.teams.filter(item=> item.team.league == league)
+    let res = this.teams.filter(item => item.team.league == league)
     if (res.length === 0) {
       console.log('pide a la api')
       res = await DataApi.getData({ endpoint: 'teams', params: `league=${league}&season=${season}` })
@@ -28,3 +32,5 @@ export class TeamsModel {
     return res
   }
 }
+
+TeamsModel.updateTeams()
