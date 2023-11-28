@@ -29,8 +29,9 @@ export class LeagueController {
   }
 
   static async getById (req, res) {
+    console.log('ligaa')
     const { id } = req.params
-    const league = await findLeagueServiceById(id)
+    const league = await LeaguesModel.getById(id)
     if (league) return res.json(league)
     res.status(404).json({ message: 'League not found' })
   }

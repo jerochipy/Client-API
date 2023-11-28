@@ -7,7 +7,7 @@ export class LeaguesModel {
 
   static updateLeagues () {
     // Tarea programada para ejecutarse una vez al día a la medianoche (00:00)
-    this.leagues = DataApi.updatesApi({ timePattern: '46 2 * * *', endpoint: 'leagues' })
+    this.leagues = DataApi.updatesApi({ timePattern: '05 21 * * *', endpoint: 'leagues' })
   }
   // static async getWithLeagueApi ({ league, season }) {
   //   const url = 'https://v3.football.api-sports.io/fixtures'
@@ -50,13 +50,13 @@ export class LeaguesModel {
 
   static async getById ({ id }) {
     let res = this.leagues.filter(item => item.league.id == id)
-    // if (res.length === 0) {
-    //   console.log('pide a la api')
-    //   res = await DataApi.getData({ endpoint: 'leagues', params: `id=${id}` })
-    //   if (res) {
-    //     this.leagues = this.leagues.concat(res)
-    //   }
-    // }
+    if (res.length === 0) {
+      console.log('pide a la api')
+      res = await DataApi.getData({ endpoint: 'leagues', params: `id=${id}` })
+      if (res) {
+        this.leagues = this.leagues.concat(res)
+      }
+    }
     return res
   }
 }
