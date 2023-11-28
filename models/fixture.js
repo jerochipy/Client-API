@@ -32,7 +32,7 @@ export class FixtureModel {
     const url = 'https://v3.football.api-sports.io/fixtures'
     const headers = {
       // 'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-apisports-key': '71e9962cf38604017c974f8be33f449b'
+      'x-apisports-key': '5bd910d020bab78f966ec2f21625476b'
     }
 
     try {
