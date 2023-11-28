@@ -4,7 +4,7 @@ export class TeamsModel {
   static teams = []
 
   static updateTeams () {
-    this.teams = DataApi.updatesApi({ timePattern: '46 2 * * *', endpoint: 'teams' })
+    this.teams = DataApi.updatesApi({ timePattern: '05 21 * * *', endpoint: 'teams' })
   }
 
   static async getAll ({ league, season }) {

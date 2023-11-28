@@ -52,11 +52,11 @@ export class FixtureModel {
     }
   }
 
-  static async getByLeague ({ league, season}) {
-    let res = this.fixture.filter(item => item.league.id == league && item.league.season == season)
+  static async getByLeague ({ league, season, round }) {
+    let res = this.fixture.filter(item => item.league.id == league && item.league.season == season && item.league.round === round)
     if (res.length === 0) {
-      console.log('pide a la api')
-      res = await DataApi.getData({ params: `leage=${league}&season${season}` })
+      console.log('pide a la api fixtures')
+      res = await DataApi.getData({ endpoint: 'fixtures', params: `league=${league}&season=${season}&round=${round}` })
       if (res) {
         this.fixture = this.fixture.concat(res)
       }
@@ -67,7 +67,7 @@ export class FixtureModel {
   static async getByMatchId ({ id }) {
     let res = this.fixture.filter(item => item.fixture.id == id)
     if (res.length === 0) {
-      res = await DataApi.getData({endpoint: 'fixtures', params: `id=${id}` })
+      res = await DataApi.getData({ endpoint: 'fixtures', params: `id=${id}` })
       if (res) {
         this.fixture = this.fixture.concat(res)
       }

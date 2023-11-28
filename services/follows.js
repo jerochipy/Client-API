@@ -149,6 +149,7 @@ export const followLeague = async (id, LeagueId) => {
       where: { Id: existingEntry.Id },
       data: { is_deleted: false }
     })
+    console.log(updatedEntry)
     return updatedEntry
   } else {
     const newEntry = await prisma.followLeague.create({

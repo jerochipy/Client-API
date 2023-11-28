@@ -53,6 +53,7 @@ export class FollowController {
   static async followPlayer (req, res) {
     const id = req.user.userId
     const { PlayerId } = req.params
+    
     try {
       const newFollow = await followPlayer(id, PlayerId)
       res.status(201).json(newFollow)
@@ -65,8 +66,10 @@ export class FollowController {
     const id = req.user.userId
     console.log(req.user)
     const { LeagueId } = req.params
+    console.log('hola ' + LeagueId)
     try {
       const newFollow = await followLeague(id, LeagueId)
+      console.log(newFollow + LeagueId)
       res.status(201).json(newFollow)
     } catch (error) {
       res.status(400).json({ error: error.message })
