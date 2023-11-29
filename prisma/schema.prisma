@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/futbol_mas?schema=public"
+}
+
+model Venue {
+  id        Int     @id @default(autoincrement())
+}
+
+model User {
+  Id        Int     @id @default(autoincrement())
+  Email     String  @unique
+  Username  String
+  Password  String
+  FirstName String
+  LastName  String
+  Country   String
+  is_deleted Boolean @default(false)
+}
+
+model League {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  type      String
+  logo      String
+  is_deleted Boolean @default(false)
+}
+
+model Team {
+  id        Int      @id
+  name      String   @unique
+  country   String
+  code      String
+  national Boolean
+  founded Int
+  logo String
+  is_deleted Boolean @default(false)
+}
+
+
+model Player {
+  id        Int     @id @default(autoincrement())
+  name    String
+  age       Int
+  number    Int
+  position  String
+  photo     String
+  is_deleted Boolean @default(false)
+}
+
+model FollowLeague {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  LeagueId  Int
+  is_deleted Boolean @default(false)
+}
+
+model FollowTeam {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  TeamId    Int
+  is_deleted Boolean @default(false)
+}
+
+model FollowPlayer {
+  Id        Int     @id @default(autoincrement())
+  UserId    Int
+  PlayerId  Int
+  is_deleted Boolean @default(false)
+}
+
+model Prediction {
+  id         Int      @id @default(autoincrement())
+  matchId    Int
+  userId     Int
+  homeScore  Int
+  awayScore  Int
+  createdAt  DateTime @default(now())
+}
