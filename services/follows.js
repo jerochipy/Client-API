@@ -1,6 +1,7 @@
 // services/follows.js
 import pkg from '@prisma/client'
 import { LeaguesModel } from '../models/leagues.js'
+import { TeamsModel } from '../models/teams.js'
 
 const { PrismaClient } = pkg
 const prisma = new PrismaClient()
@@ -12,19 +13,15 @@ export const findAllFollowTeams = async (id) => {
       UserId: id
     }
   })
-  console.log(data)
+  console.log('data:' + data + 'id:'+id)
 
   const teamInfoArray = await Promise.all(data.map(async (followedTeam) => {
     const teamId = followedTeam.TeamId
-    const teamInfo = await prisma.team.findUnique({
-      where: {
-        id: teamId
-      }
-    })
+    const teamInfo = await TeamsModel.getById({ id: teamId })
     return teamInfo
   }))
 
-  console.log(teamInfoArray)
+  console.log('teams: ' + teamInfoArray)
 
   return teamInfoArray
 }

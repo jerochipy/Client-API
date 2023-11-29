@@ -21,8 +21,8 @@ export class TeamsModel {
   }
 
   static async getById ({ id }) {
-    let res = this.leagues.filter(item => item.leagues.id == id)
-    if (res.length === 0) {
+    let res = this.teams.find(item => item.team.id == id)
+    if (res === undefined) {
       console.log('pide a la api')
       res = await DataApi.getData({ endpoint: 'teams', params: `id=${id}` })
       if (res) {

@@ -35,7 +35,6 @@ export class LeaguesModel {
 
   static async getAll ({ startIndex, endIndex }) {
     let res = this.leagues
-    console.log(res)
     if (res.length === 0) {
       console.log('pide a la api')
       res = await DataApi.getData({ endpoint: 'leagues' })
@@ -49,14 +48,26 @@ export class LeaguesModel {
   }
 
   static async getById ({ id }) {
-    let res = this.leagues.filter(item => item.league.id == id)
-    if (res.length === 0) {
+    let res = this.leagues.find(item => item.league.id == id)
+    if (res === undefined) {
       console.log('pide a la api')
       res = await DataApi.getData({ endpoint: 'leagues', params: `id=${id}` })
       if (res) {
         this.leagues = this.leagues.concat(res)
       }
     }
+    return res
+  }
+
+  searchByName ({ name }) {
+    const res = this.leagues.filter(item => item.league.name.contains(name))
+    /* if (res.length === 0) {
+      console.log('pide a la api')
+      res = await DataApi.getData({ endpoint: 'leagues', params: `id=${id}` })
+      if (res) {
+        this.leagues = this.leagues.concat(res)
+      }
+    } */
     return res
   }
 }

@@ -7,6 +7,6 @@ export const leagueRoutes = Router()
 
 leagueRoutes.get('/', LeagueController.getAll)
 
-leagueRoutes.get('/:id', verifyToken, LeagueController.getById)
+leagueRoutes.get('/:id', LeagueController.getById)
 
 leagueRoutes.post('/', verifyToken, LeagueController.create)
