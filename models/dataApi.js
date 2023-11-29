@@ -20,7 +20,7 @@ export class DataApi {
     const url = this.baseUrl + endpoint
     const headers = {
       // 'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-apisports-key': '67767856d9121ae7b46593a39167d9ac'
+      'x-apisports-key': '5bd910d020bab78f966ec2f21625476b'
     }
 
     try {
